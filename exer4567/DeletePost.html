@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>Delete Posts</title>
+		<link rel='stylesheet' type='text/css' href='../../lab9/exercise3/style.css' />
+	</head>
+	<body>
+		<form action='DeletePost.php' method='post'>
+			<fieldset>
+				<table>
+					<thead>
+						<tr><th>Username</th><th>Post ID</th><th>Content</th><th>Delete?</th></tr>	
+					</thead>
+					<tbody>
+						<?php
+							$sql = new mysqli("mysql.eecs.ku.edu","ethangrantz","baiqu3Ae","ethangrantz");
+
+							if ($sql->connect_errno) {
+								printf("Connect failed: %s\n",$sql->connect_error);
+								exit();
+							}
+
+							if ($userlst = $sql->query("SELECT * FROM Users WHERE true")) {
+								while ($row = $userlst->fetch_assoc()) {
+									$userid = $row["user_id"];
+									$postquery = "SELECT * FROM Posts WHERE author_id='$userid'";
+									if ($postlst = $sql->query($postquery)) {
+										while ($row2 = $postlst->fetch_assoc()) {
+											$postid = $row2["post_id"];
+											$content = $row2["content"];
+											echo "<tr style='background-color:white;text-align:center;'>";
+											echo "<td>$userid</td><td>$postid</td><td>$content</td>";
+											echo "<td><input type='checkbox' name='$postid'/></td></tr>";
+										}
+										$postlst->free();
+									}
+								}
+								$userlst->free();
+							}
+
+							$sql->close();
+						?>
+					</tbody>
+				<table>
+			</fieldset>
+			<fieldset id='buttonfield'>
+				<input type='submit' class='buttonn' />
+			</fieldset>
+		</form>
+		<a href="AdminHome.html">Return to AdminHome</a>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>Create Posts</title>
+		<link rel='stylesheet' type='text/css' href='../../lab9/exercise3/style.css' />
+	</head>
+	<body>
+		<form action='CreatePosts.php' method='post'>
+			<fieldset>
+				<legend><span>Create Post:</legend></span>
+				<label>
+					Username: <input type="text" name="username" required />
+				</label>
+				<label>
+					Content: <textarea name="content" rows="4" cols="55" style="overflow:auto;resize:none;" required></textarea>
+				</label>
+			</fieldset>
+			<fieldset id='buttonfield'>
+				<input type='submit' class='buttonn' />
+			</fieldset>
+		</form>
+	</body>
+</html>
